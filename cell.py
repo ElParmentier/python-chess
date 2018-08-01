@@ -3,7 +3,8 @@ class Cell():
         self.occupied = occupied
         self.coord = coord
         self.graphic_obj = graphic_obj
-        self.color = "noire" if (coord[0] + coord[1]) % 2 == 0 else "blanche"
+        self.bg_color = "BLACK" if (coord[0] + coord[1]) % 2 == 0 else "WHITE"
+        self.fg_color = "WHITE" if (coord[0] + coord[1]) % 2 == 0 else "BLACK"
 
     def __str__(self):
         if (self.occupied == False):
