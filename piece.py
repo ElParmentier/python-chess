@@ -1,5 +1,5 @@
 class Piece():
-    def __init__(self, coord, starting_pos, piece_type):
+    not_pawn = ["Tour", "Cavalier", "Fou", "Reine", "Roi", "Fou", "Cavalier", "Tour"]
+    def __init__(self, coord, piece_type):
         self.coord = coord
-        self.starting_pos = starting_pos
         self.piece_type = piece_type

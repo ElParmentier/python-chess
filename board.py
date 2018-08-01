@@ -12,9 +12,9 @@ class Board():
             for j in columns:
                 cell_coord = (columns.index(j), i)
                 if i == 1 or i == 6:
-                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, True, "Pion"), cell_coord, False)
+                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, "Pion"), cell_coord, False)
                 elif i == 0 or i == 7:
-                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, True, "Stronkboi"), cell_coord, False)    
+                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, Piece.not_pawn[columns.index(j)]), cell_coord, False)
                 else:
                     self.cells[j + str(i + 1)] = Cell(False, cell_coord, False)
 
