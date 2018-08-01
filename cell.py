@@ -5,4 +5,6 @@ class Cell():
         self.graphic_obj = graphic_obj
 
     def __str__(self):
-        return "position {} est {}".format(self.coord, "occupée" if self.occupied else "vide")
+        if (self.occupied == False):
+            return "position {} est {}".format(self.coord, "vide")
+        return "position {} est occupée par un {}".format(self.coord, self.occupied.piece_type)
