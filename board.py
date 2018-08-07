@@ -7,6 +7,11 @@ root = tk.Tk()
 class Board():
     def __init__(self):
         self.cells = {}
+        self.elites = []
+        for i in range(1, 6):
+            self.elites.append(PieceType(i).name)
+        for i in reversed(range(1, 4)):
+            self.elites.append(PieceType(i).name)
 
     def initBoard(self):
         columns = list(map(chr, range(97, 105))) # Generates list from a to h (inclusive)
@@ -14,14 +19,14 @@ class Board():
             for j in columns:
                 cell_coord = (columns.index(j), i)
                 if i == 1 or i == 6:
-                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, "Pion"), cell_coord, tk.Label(root, width = 3))
+                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, "Pawn"), cell_coord, tk.Label(root, width = 5, height = 2))
                 elif i == 0 or i == 7:
-                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, Piece.elites[columns.index(j)]), cell_coord, tk.Label(root, width = 3))
+                    self.cells[j + str(i + 1)] = Cell(Piece(cell_coord, self.elites[columns.index(j)]), cell_coord, tk.Label(root, width = 5, height = 2))
                 else:
-                    self.cells[j + str(i + 1)] = Cell(False, cell_coord, tk.Label(root, width = 3))
+                    self.cells[j + str(i + 1)] = Cell(False, cell_coord, tk.Label(root, width = 5, height = 2))
                 created_cell = self.cells[j + str(i + 1)]
                 created_cell.graphic_obj.config(bg = created_cell.bg_color, fg = created_cell.fg_color)
-                created_cell.graphic_obj.grid(row = 8 - created_cell.coord[1], column = 8 - created_cell.coord[0])
+                created_cell.graphic_obj.grid(row = 8 - created_cell.coord[1], column = created_cell.coord[0])
 
     def displayBoardState(self):
         for cell in self.cells:
@@ -35,7 +40,7 @@ class Board():
         for current_cell in self.cells:
             cell = self.cells[current_cell]
             if isinstance(cell.occupied, Piece):
-                cell.graphic_obj.config(text = 'A')
+                cell.graphic_obj.config(text = cell.occupied.piece_type.name[:1])
 
 
 
