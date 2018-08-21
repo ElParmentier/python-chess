@@ -1,6 +1,6 @@
 import tkinter as tk
 from cell import *
-from piece import *
+from move import *
 
 root = tk.Tk()
 
@@ -8,6 +8,7 @@ class Board():
     def __init__(self):
         self.cells = {}
         self.elites = []
+        self.current_move = 0
         for i in range(1, 6):
             self.elites.append(PieceType(i).name)
         for i in reversed(range(1, 4)):
@@ -27,6 +28,11 @@ class Board():
                 created_cell = self.cells[j + str(i + 1)]
                 created_cell.graphic_obj.config(bg = created_cell.bg_color, fg = created_cell.fg_color)
                 created_cell.graphic_obj.grid(row = 8 - created_cell.coord[1], column = created_cell.coord[0])
+        b_next = tk.Button(root, text = "Next Move", width = 20, command = self.nextMove)
+        b_previous = tk.Button(root, text = "Previous Move", width = 20, command = self.previousMove)
+        b_next.grid(row = 0, column = 9)
+        b_previous.grid(row = 1, column = 9)
+
 
     def displayBoardState(self):
         for cell in self.cells:
@@ -42,9 +48,18 @@ class Board():
             if isinstance(cell.occupied, Piece):
                 cell.graphic_obj.config(text = cell.occupied.piece_type.name[:1])
 
+    def nextMove(self):
+        self.current_move += 1
+        print(self.cells[firstMove])
+
+    def previousMove(self):
+        if self.current_move > 0:
+            self.current_move -= 1
+        print(self.current_move)
 
 
-sampleMoves = ["e4 c5", "Nf3 Nc6", "d4 cxd4", "Nxd4 Nf6"]
+firstMove = "e4"
+allMoves = ["e4 c5", "Nf3 Nc6", "d4 cxd4", "Nxd4 Nf6"]
 board = Board()
 board.initBoard()
 board.displayBoard()

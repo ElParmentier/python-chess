@@ -8,5 +8,5 @@ class Cell():
 
     def __str__(self):
         if (self.occupied == False):
-            return "{} position {} est {}".format(self.color, self.coord, "vide")
-        return "{} position {} est occupée par un {}".format(self.color, self.coord, self.occupied.piece_type)
+            return "la position {} est {}".format(self.coord, "vide")
+        return "la position {} est occupée par un {}".format(self.coord, self.occupied.piece_type)
